@@ -1,0 +1,20 @@
+﻿@page
+@using Pages.Extensions
+@model ContosoUniversity.Pages.Courses.DeleteModel
+
+@{
+    Layout = "_Delete";
+    ViewData["Page"] = "Courses";
+}
+
+@Html.Show(model => model.Course.CourseID)
+@Html.Show(model => model.Course.Title)
+@Html.Show(model => model.Course.Credits)
+@Html.Show(model => model.Course.Department, model => model.Course.Department.Name)
+
+
+@section DeleteBinding
+{
+    <input type="hidden" asp-for="Course.CourseID" />
+}
+@section ErrorMessage {}
