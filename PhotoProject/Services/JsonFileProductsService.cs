@@ -36,30 +36,30 @@ namespace PhotoProject.Services
         public void AddRating(string productId, int rating)
         {
             var products = GetProducts();
-            var quary = products.First(x => x.Id == productId);
 
-            if(quary.Rating == null)
+            if(products.First(x => x.Id == productId).Ratings == null)
             {
-                quary.Rating = new int[] { rating };
+                products.First(x => x.Id == productId).Ratings = new int[] { rating };
             }
             else
             {
-                var ratings = quary.Rating.ToList();
+                var ratings = products.First(x => x.Id == productId).Ratings.ToList();
                 ratings.Add(rating);
-                quary.Rating = ratings.ToArray();
+                products.First(x => x.Id == productId).Ratings = ratings.ToArray();
             }
 
             using (var outputStream = File.OpenWrite(JsonFileName))
             {
                 JsonSerializer.Serialize<IEnumerable<Product>>(
-                    new Utf8JsonReader(outputStream, new JsonWriterOptions
-                    {
+                    new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                   {
                         SkipValidation = true,
                         Indented = true 
                     }),
                       products
                     );
             }
+            
         }
     }
 }

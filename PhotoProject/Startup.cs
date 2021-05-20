@@ -29,6 +29,7 @@ namespace PhotoProject
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpClient();
             services.AddControllers();
             services.AddTransient<JsonFileProductService>();
         }
